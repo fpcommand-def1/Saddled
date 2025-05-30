@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+//Getting all Posts
+const {posts} = Astro.props;
+
+interface Props {
+    posts:CollectionEntry<'post'>[]    
+}
+---
+<div class='mt-10 sm:mt-18 grid grid-cols-1 sm:grid-cols-2 gap-2'>
+
+    {posts.map((post)=>(
+            <div class='relative col-span-1 items-center'>
+
+            
+            <a href={`/post/${post.slug}`}>
+            <img src={post.data.image} alt="feature_story" class='h-full object-cover' loading="lazy" decoding="async" width="1200" height="800" />
+            <div class='absolute inset-0 z-10 flex items-center justify-center transition duration-200 ease-in opacity-100 sm:opacity-0 hover:opacity-100'>
+                <div class='bg-black/50 absolute inset-x-0 bottom-0 h-20 sm:h-25 '>
+                    <div class='mx-auto text-white z-10 tracking-widest text-sm'>
+                        <p class='text-white text-lg lg:text-2xl text-center pt-4 uppercase'>{post.data.title}</p>
+                        <p class='text-white text-md lg:text-xl pb-3 sm:pb-6 sm:pt-2 text-center'><em>{post.data.author}</em></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+            ))
+        }
+</div>

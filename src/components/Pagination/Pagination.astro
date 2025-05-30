@@ -1,0 +1,25 @@
+---
+const {currentPage, totalPages, disablePrevious, disableNext} = Astro.props;
+interface Props {
+    currentPage: number,
+    totalPages: number,
+    disablePrevious: boolean,
+    disableNext: boolean
+}
+---
+
+<!-- Pagination -->
+<div class="flex justify-between mt-10">
+    <a
+      href={'/features?page='+ (currentPage-1)}
+      class={disablePrevious ? "inline-block mx-5 px-6 py-3 border-2 border-gray text-black hover:bg-black hover:text-white transition duration-300 uppercase tracking-wide text-gray-400 pointer-events-none":"mx-5 px-6 py-3 border-2 border-black text-black hover:bg-black hover:text-white transition duration-300 uppercase tracking-wide"}
+    >
+      Previous
+    </a>
+    <a
+      href={'/features?page='+ (currentPage+1)}
+      class={disableNext ? "inline-block mx-5 px-6 py-3 border-2 border-gray text-black hover:bg-black hover:text-white transition duration-300 uppercase tracking-wide text-gray-400 pointer-events-none":"mx-5 px-6 py-3 border-2 border-black text-black hover:bg-black hover:text-white transition duration-300 uppercase tracking-wide"}
+    >
+      Next
+    </a>
+  </div>

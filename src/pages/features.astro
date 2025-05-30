@@ -1,0 +1,30 @@
+---
+import CTA from "../components/CTA/CTA.astro"
+import Divider from "../components/Divider/Divider.astro"
+import FeaturesGrid from "../components/Features/FeaturesGrid.astro"
+import MainLayout from "../layouts/MainLayout.astro"
+
+import { ARTICLES_PER_PAGE } from "../constants";
+
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Pagination from "../components/Pagination/Pagination.astro";
+
+const allPostArticles: CollectionEntry<"post">[] = (
+    await getCollection("post")).sort((a: CollectionEntry<"post">, b: CollectionEntry<"post">) =>
+		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+
+const currentPage: number |null = +Astro.url.searchParams.get('page')! || 1;
+const totalPages:number = Math.ceil(allPostArticles.length / ARTICLES_PER_PAGE);
+
+const articlesForPage: CollectionEntry<'post'>[]=allPostArticles.slice((currentPage -1) * ARTICLES_PER_PAGE, currentPage * ARTICLES_PER_PAGE);
+
+---
+<MainLayout title="Featured Stories" description="Explore all the stories and articles published — tales of journeys, discoveries, and life on two wheels.">
+    <FeaturesGrid posts={articlesForPage}/>
+    <Pagination currentPage={currentPage} totalPages={totalPages} disablePrevious={currentPage === 1} disableNext={currentPage===totalPages}/>
+    <Divider title='SUBSCRIBE' />
+	<CTA />
+</MainLayout>

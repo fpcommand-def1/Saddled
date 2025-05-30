@@ -1,0 +1,101 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Tags from "../../components/Tags/Tags.astro";
+import {formatDate} from '../../utils';
+import { getEntry } from "astro:content";
+import {DOMAIN} from "../../constants"
+import CTA from "../../components/CTA/CTA.astro";
+
+const {slug} = Astro.params;
+
+if(slug === undefined){
+    throw new Error('Slug is required');
+}
+
+const entry = await getEntry('post', slug);
+
+
+if(entry === undefined){
+    return Astro.redirect('/404');
+}
+
+const {Content} = await entry.render();
+
+
+
+
+// {formatDate(entry.data.pubDate)}
+---
+
+{ entry && (<MainLayout title={entry?.data.title} description={entry?.data.descriptiveTitle} image={entry?.data.image} url={DOMAIN + 'post/' + entry.slug}>
+
+{/* JSON LD Metadata */}
+<Fragment slot="headExtra">
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": entry.data.title,
+    "description": entry.data.description,
+    "image": entry.data.image,
+    "author": {
+      "@type": "Person",
+      "name": entry.data.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Saddled",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${DOMAIN}/logo.png`
+      }
+    },
+    "url": `${DOMAIN}/${entry.slug}`,
+    "datePublished": entry.data.pubDate.toISOString()
+  }
+</script>
+</Fragment>
+
+{/* Post Data Display */}
+
+<img src={entry?.data.image} alt='Hero' class="w-screen h-screen object-cover flex-shrink-0" />
+<div class="px-6 sm:px-[8vw] md:px-[12vw] lg:px-[26vw]">
+  <article class="w-full h-full flex-shrink-0 prose prose-invert">
+    <h1 class="text-2xl sm:text-5xl text-center pt-10 pb-3 sm:pt-20 sm:pb-5"> {entry?.data.title}</h1>
+    <p class='text-md sm:text-xl text-center pb-5 sm:pb-3'><em>{entry?.data.descriptiveTitle}</em></p>
+    <p class='text-md sm:text-xl pb-10 text-center sm:pb-20'><em>Written & Photographed by : {entry?.data.author} , {entry?.data.photographer}</em></p>
+
+    <p class='text-md sm:text-xl text-justify pb-5 sm:pb-10 text-gray-500'>{entry?.data.description}</p>
+        
+    <hr class='w-full h-full bg-gray-500 h-[1px] mb-5 sm:mb-10' />
+
+    {/* <Content /> */}
+    <Content class="content"/>
+    <Tags tags={entry.data.tags} />
+  </article>
+
+  <hr class='w-full h-full bg-gray-500 h-[1px] mb-5 sm:mb-10 sm:mt-10' />
+          
+  <p class='text-sm sm:text-md text-justify pb-5 sm:pb-5'>Words and photography by <span><a href={`${entry.data.authorURL}`} class='underline'>{entry.data.author}</a></span> // <span><a href={`${entry.data.photographerURL}`} class='underline'>{entry.data.photographer}</a></span> </p>
+
+  <CTA />
+    
+</div>
+    
+</MainLayout>
+
+
+
+
+
+<style is:global>
+     p {
+         padding:20px 0;
+     }
+     h2{
+         margin: 20px 0;
+         font-size:1.8rem;
+     }
+</style>
+)}

@@ -1,0 +1,40 @@
+---
+import Divider from "../components/Divider/Divider.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+import guidelines from "../data/contribution-guidelines.json"
+
+---
+<MainLayout title="Contribution Guidelines" description="Interested in sharing your adventure? Read Saddled Journal's contribution guidelines to structure and submit your story.">
+
+    <Divider title="CONTRIBUTION GUIDELINES" />
+    
+    <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] flex flex-col items-start justify-center gap-8 mt-[-1px] mb-10 px-4'>
+        <p class='text-xl sm:text-xl mt-10'> Please email our proposal or idea to <span><em>{guidelines.email}</em></span></p>
+        <p class='text-xl sm:text-xl text-start'>Thank you for your interest in contributing to Sidetracked! We are all about sharing emotive, intoxicating adventures through gripping stories, breathtaking photography and awe-inspiring video. A foundation for those seeking adventure or wanting to immerse themselves in the adventures of others to be inspired and captivated. We want the way these stories are presented to be beautiful, timeless and welcoming. Settle down with a brew, kick back and lose yourself in what the world has to offer.</p> 
+        
+        <p class='text-xl sm:text-xl tracking-wide py-5 font-semibold tracking-wide'>What Kind of Proposal Is TRJ Looking For ?</p>  
+        <p class='text-xl sm:text-xl'>{guidelines.kind_of_proposal}</p>  
+        
+        <p class='text-xl sm:text-xl tracking-wide py-5 font-semibold tracking-wide'>How Should an Idea be Proposed ?</p>
+        <p class='text-xl sm:text-xl text-start'>Please do not send us manuscripts unless we ask. If you have already completed the adventure you want to tell us about, please email submissions@sidetracked.com with: <br /></p>
+        <ul class='text-xl sm:text-xl list-disc list-inside p-4'>
+            <li>A one-paragraph proposal outlining the story</li>
+            <li>The proposed first paragraph of your story</li>
+            <li>Brief details of how you undertook your journey, including any technical and geographical information we need to check our facts when we publish</li>
+            <li>You MUST have wonderful photography and please include 5 low-resliution images to give a flavour of your trip if emailing, your whole message should not be larger than 2MB</li>
+            <li>Feel free to include any relevant experience you have, with links to/cuttings from previously published stories if possible</li>
+            <li>Submissions must be in English and unpublished elsewhere</li>
+        </ul>
+        
+        <p class='text-xl sm:text-xl tracking-wide py-5 font-semibold tracking-wide'>What Does Sidetracked Look For in Writing Style ?</p>
+        <p class='text-xl sm:text-xl text-start'>{guidelines.writing_style}</p>
+            
+            
+            <p class='text-xl sm:text-xl tracking-wide py-5 font-semibold tracking-wide'>A Note on Generative AI</p>
+            <p class='text-xl sm:text-xl text-start'>{guidelines.generative_ai}</p>
+
+<p class='text-xl sm:text-xl tracking-wide py-5 font-semibold tracking-wider'>Polite Request</p>
+<p class='text-xl sm:text-xl text-start pb-20'>{guidelines.request}</p>   
+</div>
+</MainLayout>

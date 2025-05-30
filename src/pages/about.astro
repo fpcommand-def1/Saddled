@@ -1,0 +1,86 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+
+import team from "../data/team.json"
+---
+<MainLayout title="About Us" description="Learn about Saddled Journal's mission to capture the spirit of adventure and the passionate team behind the stories.">
+    <div class="mt-12 md:mt-16 bg-black">
+
+    
+    <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-black pt-10 sm:pt-20 flex flex-col items-center justify-center mt-[-0.5px]'>
+        <p class='uppercase tracking-widest text-3xl sm:text-4xl text-white'>About</p>
+
+        <p class='text-3xl sm:text-3xl text-white text-center p-10'>To see the world, things dangerous to come to, to see behind walls, draw closer, to find each other, and to feel. That is the purpose of life</p>
+        
+    </div>
+      
+      <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+        <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+      </div>
+
+     <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-black flex flex-col items-start justify-center gap-5 mt-[-1px]'>
+        <p class='text-xl sm:text-xl text-white'>TRJ captures the emotion and experience of adventure throughout the world. We seek out the undiscovered, challenge ourselves, and push back limits. But above all, we create connections with humanity, history, landscape and culture. We share meaningful stories that represent all life on this planet. Because, by creating an inspired community, together we can forge a trail for positive change.
+          We've always been rooted in inspirational journeys telling stories online and via our print journals, of those who put themselves out there, setting aside fear and doubt in order to experience the breathtaking, the awe-inspiring, and the magical.
+          If you would like to contribute a story</p>
+          <p class='text-xl sm:text-xl text-white text-start'>Please review our <span> <a href="/contribution-guidelines" class='text-white'>Contribution Guidelines</a></span></p> 
+          
+     </div>
+
+     <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+        <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+      </div>
+
+     <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-black flex flex-col items-start justify-center gap-5 mt-[-1px]'>
+        <p class='uppercase tracking-widest text-3xl sm:text-3xl text-white'>The TRJ Team</p>
+        <p class='text-xl sm:text-xl text-white'>TRJ Team best multiple awefsome ppl workign all round to get you the best strawberries from across the world. </p>
+         
+     </div>
+
+     <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+        <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+      </div>
+
+      {team.map(member => (
+        <>
+      
+          <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-black flex flex-col items-start justify-center gap-5 mt-[-1px]'>
+            <p class='uppercase tracking-widest text-xl sm:text-xl text-white'>
+              {member.name}, <em class='text-sm'>{member.title}</em>
+            </p>
+            <p class='text-xl sm:text-xl text-white'>{member.bio}</p>
+            <p class='text-xl sm:text-xl text-white'>
+              W : <span><a href={member.website} class='hover:underline' target="_blank" rel="noopener">Website</a></span>
+            </p>
+            <p class='text-xl sm:text-xl text-white'>
+              X : <span><a href={member.x} class='hover:underline' target="_blank" rel="noopener">Twitter</a></span>
+            </p>
+            <p class='text-xl sm:text-xl text-white'>
+              Ig : <span><a href={member.ig} class='hover:underline' target="_blank" rel="noopener">Instagram</a></span>
+            </p>
+          </div>
+          <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+            <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+          </div>
+        </>
+      ))}
+
+     <!-- <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+        <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+      </div> -->
+
+     <div class='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-black flex flex-col items-start justify-center gap-5 mt-[-1px]'>
+        <p class='uppercase tracking-widest text-3xl sm:text-3xl text-white'>Please Note</p>
+        <p class='text-xl sm:text-xl text-white'>The content for this site is produced, compiled and edited by TRJ under agreement with the contributors. The copyright for TRJ Magazine is with TRJ Ltd.
+We work extremely hard alongside our contributors to bring you the very best stories from across the world of adventure travel. Hence we politely wish to ask other websites and publications to refrain from cloning our content without prior expressed permission from TRJ. The featuring of TRJ-edited content is strictly forbidden, and we ask that all work first appearing on the TRJ website be credited as such with a link to the original story. </p>
+         
+     </div>
+
+     <div class='flex flex-col items-center justify-center bg-black p-20 mt-[-1px]'>
+        <hr class='border-none h-[1px] w-1/2 bg-gray-200' />
+      </div>
+
+      <div class="p-10">
+
+      </div>
+    </div>
+</MainLayout>

@@ -1,0 +1,99 @@
+---
+const currentPath = Astro.url.pathname;
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Features', path: '/features' },
+//   { name: 'Magazine', path: '/magazine' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact Us', path: '/contact' },
+];
+
+---
+
+<nav x-data="{ open: false }" class="bg-black w-full py-6 sm:py-8 flex justify-center items-center fixed top-0 left-0 z-50 shadow-md">
+    <div class="relative w-full max-w-7xl flex items-center justify-center">
+        <!-- Left Navigation -->
+        <ul class="hidden sm:flex gap-20 text-white font-semibold text-sm uppercase absolute md:left-12 lg:left-50">
+            <li>
+                <a href={`${navLinks[0].path}`} class="hover:text-gray-500 transition">
+                    {navLinks[0].name}
+                    {currentPath === navLinks[0].path ? ( <hr class="bg-white p-[0.5px] mt-1 w-full" /> ) : ''}
+                    
+                </a>
+            </li>
+            <li>
+                <a href={`${navLinks[1].path}`} class="hover:text-gray-500 transition">
+                    {navLinks[1].name}
+                    {currentPath === navLinks[1].path ? ( <hr class="bg-white p-[0.5px] mt-1 w-full" /> ) : ''}
+                </a>
+            </li>
+        </ul>
+
+        <!-- Logo (centered, circular) -->
+        <div class="hidden sm:block absolute mt-15">
+            <a href="/" class="z-10">
+                <img
+                    src="/images/logo/trj_logo.png"
+                    alt="Logo"
+                    class="w-20 h-20 bg-white rounded-full p-1"
+                    loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="800"
+                    />
+            </a>
+        </div>
+
+        <!-- Right Navigation -->
+        <ul class="hidden sm:flex gap-20 text-white font-semibold text-sm uppercase absolute md:right-12 lg:right-50">
+            <li>
+                <a href={`${navLinks[2].path}`} class="hover:text-gray-500 transition">
+                    {navLinks[2].name}
+                    {currentPath === navLinks[2].path ? ( <hr class="bg-white p-[0.5px] mt-1 w-full" /> ) : ''}
+                </a>
+            </li>
+            <li>
+                <a href={`${navLinks[3].path}`} class="hover:text-gray-500 transition">
+                    {navLinks[3].name}
+                    {currentPath === navLinks[3].path ? ( <hr class="bg-white p-[0.5px] mt-1 w-full" /> ) : ''}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Mobile Menu -->
+
+    <div class="sm:hidden flex justify-center w-full absolute top-5">
+        <button @click="open = !open" class="z-20">
+            <img
+                src="/images/logo/trj_logo.png"
+                alt="logo"
+                class="w-15 h-15 p-[1px] bg-white rounded-full"
+                loading="lazy"
+                decoding="async"
+            />
+        </button>
+    </div>
+
+    <div x-show="open" class="sm:hidden absolute top-full left-0 w-full bg-black text-white py-4 px-6 flex flex-col gap-4 font-semibold uppercase shadow-md">
+        <a href={`${navLinks[0].path}`}
+            class="hover:text-gray-500 transition"
+            @click="open = false">{navLinks[0].name}
+        </a>
+        <a href={`${navLinks[1].path}`}
+            class="hover:text-gray-500 transition"
+            @click="open = false">{navLinks[1].name}
+        </a>
+        <a href={`${navLinks[2].path}`}
+            class="hover:text-gray-500 transition"
+            @click="open = false">{navLinks[2].name}
+        </a>
+        <a href={`${navLinks[3].path}`}
+            class="hover:text-gray-500 transition"
+            @click="open = false">{navLinks[3].name}
+        </a>
+    </div>
+</nav>
+
+
+

@@ -1,0 +1,39 @@
+---
+---
+
+<div class='flex flex-col items-center justify-center mb-20 mt-20 sm:mt-20 pb-15'> 
+    <p class='text-gray-700 text-lg sm:text-xl mb-8 pl-10 pr-10 text-center'>I just cant get enough of strawberry, I think I am in love with strawberry, I am going to get married to strawberry</p> 
+    <form id="subscriber-form" class='flex justify-between max-w-[500px] sm:scale-100 mx-auto border border-black h-[50px]'>
+        <input type="email" name="email" placeholder="Sign up for updates" class='border-none pl-5 pr-5 w-[200px] sm:w-[500px]' required/>
+        <button type='submit' class='bg-black text-white sm:text-xl px-4 py-1 sm:px-8 sm:py-2 border-l hover:bg-white hover:text-black hover:border-1 transition duration-300'>SUBMIT</button>
+    </form>
+    <p id="form-status" class="text-lg mt-4 hidden">Subscribed</p>
+</div>
+
+
+<!-- For Handling Form Submit -->
+<script type="module">
+	const form = document.getElementById('subscriber-form');
+	const status = document.getElementById('form-status');
+  
+	form.addEventListener('submit', async (e) => {
+	  e.preventDefault();
+  
+	  const formData = new FormData(form);
+  
+	  const res = await fetch('/api/subscribe', {
+		method: 'POST',
+		body: formData
+	  });
+	  const result = await res.json();
+	  if (res.ok) {
+		form.reset();
+		status.classList.remove('hidden');
+		status.textContent = result.message;
+	  } else {
+		status.classList.remove('hidden');
+		status.textContent = result.message;
+		status.classList.add('pointer-events-none');
+	  }
+	});
+  </script>

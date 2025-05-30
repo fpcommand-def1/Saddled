@@ -1,0 +1,76 @@
+---
+import "../styles/global.css"
+
+import Navbar from "../components/Header/Navbar.astro";
+import Footer from "../components/Footer/Footer.astro";
+
+import {SITE_TITLE, SITE_DESCRIPTION} from '../constants'
+import { ClientRouter } from "astro:transitions";
+
+
+interface Props {
+  title:string;
+  description?:string;
+  image?:string;
+  url?:string
+}
+
+const {title='Expeditions and Stories',
+  description="Stories of motorcycles, roads, and people who chase freedom on two wheels.",
+  image = "/images/logo/trj_logo.png",
+  url = `https://yoursite.com${Astro.url.pathname}`
+
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="description" content={SITE_DESCRIPTION}>
+    <!-- Alpine JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>{title} | {SITE_TITLE}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={url} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/logo/trj_logo_favicon.png" />
+
+      <!-- Open Graph -->
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
+
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+
+      <ClientRouter />
+
+      <!-- For JSON LD Metadata -->
+      <slot name="headExtra" />
+
+    
+
+  </head>
+  <body class="" >
+    
+    <Navbar/>
+
+    <div>
+      <slot />
+    </div>
+    
+
+    <Footer />
+    
+    </body>
+  </html>

@@ -1,0 +1,32 @@
+---
+import Hero from "../components/Header/Hero.astro"
+import MainLayout from "../layouts/MainLayout.astro"
+import Divider from "../components/Divider/Divider.astro"
+import CTA from "../components/CTA/CTA.astro"
+
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+import FeaturesGallery from "../components/Features/FeaturesGallery.astro";
+
+//Getting all Posts
+const allPostArticles: CollectionEntry<"post">[] = (
+    await getCollection("post")).sort((a: CollectionEntry<"post">, b: CollectionEntry<"post">) =>
+		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<MainLayout title="Home" description="Discover inspiring motorcycle adventures, travel stories, and road experiences from riders around the world.">
+	<Hero recentPost={allPostArticles?.[0]}/>
+	<p class='pt-20 pl-5 pr-5 text-md sm:mt-0 sm:pt-25 sm:pl-20 sm:pr-20 sm:text-2xl text-center tracking-widest w-full'>
+		TRJ is all things strawberry. We at TRJ love strawberries so much that we cant imagine our lives without strawberries
+		Without Strawberries our ives would be so bland, but with the red juicy flavourful fruit our lives are so much better.
+		It is such a great yummy and tasty fruit that we can't get enough of it. We love evry ounce of strawberries that we can
+		get into our stomachs.
+	</p>
+	<Divider title='EXPLORE' />
+	<FeaturesGallery allPosts={allPostArticles.slice(1,9)}/>
+	<Divider title='SUBSCRIBE' />
+	<CTA />
+
+</MainLayout>

@@ -1,0 +1,39 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<div class={`bg-black w-full ${currentPath==='/about' || currentPath==='/terms' ?'':'mt-20'}`}>
+    <div class='w-full pt-20 px-8 md:px-16 lg:px-28'>
+        <div class='grid grid-cols-1 md:grid-cols-3 gap-16 text-white text-md md:text-lg py-20 md:place-items-center'>
+            <div class='md:font-bold'>
+                <a href="/">
+                    <p class="pt-2 cursor-pointer hover:overline">Home</p>
+                </a>
+                <a href="/features">
+                    <p class="pt-2 cursor-pointer hover:overline">Features</p>
+                </a>
+                <!-- <a href="/magazine">
+                    <p class="pt-2 cursor-pointer hover:overline">Magazine</p>
+                </a> -->
+            </div>
+            <div class='md:font-bold'>
+                <a href="/about">
+                    <p class="pt-2 cursor-pointer hover:overline">Information</p>
+                </a>
+                <a href="/contribution-guidelines">
+                    <p class="pt-2 cursor-pointer hover:overline">Contribution Guidelines</p>
+                </a>
+                <a href="/terms">
+                    <p class="pt-2 cursor-pointer hover:overline">Privacy & Terms</p>
+                </a>
+            </div>
+            <div class='md:font-bold md:px-16'>
+                <p class="pt-2 cursor-pointer hover:overline">Twitter</p>
+                <p class="pt-2 cursor-pointer hover:overline">Facebook</p>
+                <p class="pt-2 cursor-pointer hover:overline">Instagram</p>
+            </div>
+        </div>
+    </div>
+    <hr class='border-none bg-gray-600 h-[1.5px] w-full' />
+    <p class='px-10 py-5 text-center text-gray-200'>© Copyright TRJ Ltd 2025. All rights reserved.</p>
+</div>

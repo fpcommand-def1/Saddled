@@ -1,0 +1,34 @@
+[
+    {
+      "name": "Frodo Baggins",
+      "title": "Someone in team",
+      "bio": "Frodo's adventurous journey with strawberries was not only cool but awesome. The dark lord had to be destroyed and his all seing tower needed to be demolished. With a stern diligence of not giving into the desire of keeping the strawberry for himself as countless men have done before him, he bore the burden to take the strawberry to mount doom and let it be destroyed for once and for all.",
+      "website": "https://frodo.com",
+      "x": "https://twitter.com/frodo",
+      "ig": "https://instagram.com/frodo"
+    },
+    {
+      "name": "Samwise Gamgee",
+      "title": "Someone in team",
+      "bio": "Sam grows the best strawberries in the Shire, but on Gandlafs request he agrees to joing Frodo in his journey through the netherworld. Fascinated by the elves and having immense respect for the dwarves, samwise ensured that master Frodo never felt alone in his journey to mount Doom.",
+      "website": "https://samwise.com",
+      "x": "https://twitter.com/samwise",
+      "ig": "https://instagram.com/samwise"
+    },
+    {
+      "name": "Meriadock Brandybuck",
+      "title": "Someone in team",
+      "bio": "Meriadock grows the best strawberries in the Shire, but on Gandlafs request he agrees to joing Frodo in his journey through the netherworld. Fascinated by the elves and having immense respect for the dwarves, samwise ensured that master Frodo never felt alone in his journey to mount Doom.",
+      "website": "https://samwise.com",
+      "x": "https://twitter.com/samwise",
+      "ig": "https://instagram.com/samwise" 
+    },
+    {
+        "name": "Pippin Took",
+        "title": "Someone in team",
+        "bio": "Pippin grows the best strawberries in the Shire, but on Gandlafs request he agrees to joing Frodo in his journey through the netherworld. Fascinated by the elves and having immense respect for the dwarves, samwise ensured that master Frodo never felt alone in his journey to mount Doom.",
+        "website": "https://samwise.com",
+        "x": "https://twitter.com/samwise",
+        "ig": "https://instagram.com/samwise" 
+      }
+  ]

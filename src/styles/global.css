@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+
+  @font-face {
+    font-family: 'Outfit';
+    src: url('/fonts/Outfit-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    font-family: 'Outfit', 'Arial', sans-serif;
+    letter-spacing: 4px;
+  }
+
+  Content.content{
+    letter-spacing: 2px;
+    font-family: 'Arial';
+  }
