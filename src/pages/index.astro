@@ -9,6 +9,8 @@ import type { CollectionEntry } from "astro:content";
 
 import FeaturesGallery from "../components/Features/FeaturesGallery.astro";
 
+//
+
 //Getting all Posts
 const allPostArticles: CollectionEntry<"post">[] = (
     await getCollection("post")).sort((a: CollectionEntry<"post">, b: CollectionEntry<"post">) =>
