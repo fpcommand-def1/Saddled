@@ -1,28 +1,30 @@
 ---
 import Divider from "../components/Divider/Divider.astro"
 import MainLayout from "../layouts/MainLayout.astro"
+
+const backendUrl = import.meta.env.PUBLIC_BACKEND_URL;
 ---
-<MainLayout title="Contact Us" description="Get in touch with Saddled. Send us your queries, share your feedback, or submit your own adventure stories for publishing.">
-    <Divider title={"CONTACT"} />
+<MainLayout title="Home" description="Login Page for exploring motorcycling rides.">
+    <Divider title={"SIGNUP"} />
     <form method="POST" id="form" class='mt-10 mb-10 max-w-[800px] sm:scale-100 mx-auto'>
         <div class='flex flex-col justify-center items-center gap-5'>
-
-            <input type="hidden" name="access_key" value={import.meta.env.WEB3_ACCESS_KEY}>
+         
             <input type="text" name="name" placeholder="Name" class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2' required/>
-          
             <input type="email" name="email" placeholder="Email" class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2' required/>
-            <input type="text" name="subject" placeholder="Subject" class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2' />
-            <textarea  name="message" placeholder="Vroom Vroom" rows={8} class='w-[320px] sm:w-[600px] border border-black p-2' />
-            <button type='submit' class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2 bg-black text-white text-lg hover:bg-white hover:text-black hover:cursor-pointer'>Submit</button>
+            <input type="password" name="password" placeholder="Password" class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2' />
+            <button type='submit' class='w-[320px] sm:w-[600px] h-[50px] border border-black p-2 bg-black text-white text-lg hover:bg-white hover:text-black hover:cursor-pointer'>Signup</button>
+            <div>Already have an Account? <a href="/login" class="font-semibold">Login</a></div>
             <div id="result"></div>
         </div>
         
       </form>
+
 </MainLayout>
 
-<script is:inline>
+
+<script is:inline define:vars={{backendUrl}}>547
     const form = document.getElementById('form');
-const result = document.getElementById('result');
+    const result = document.getElementById('result');
 
 form.addEventListener('submit', function(e) {
     const formData = new FormData(form);
@@ -33,7 +35,7 @@ form.addEventListener('submit', function(e) {
 
     result.innerHTML = "Please wait..."
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch(backendUrl + '/api/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,11 +45,15 @@ form.addEventListener('submit', function(e) {
         })
         .then(async (response) => {
             let json = await response.json();
-            if (response.status == 200) {
-                result.innerHTML = json.message;
+            if (json.success) {
+                result.innerHTML = json.message || "User Registered!";
+                // Delay redirection to home page
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1500);
             } else {
                 console.log(response);
-                result.innerHTML = json.message;
+                result.innerHTML = json.message || "Registration Failed";
             }
         })
         .catch(error => {
@@ -58,7 +64,7 @@ form.addEventListener('submit', function(e) {
             form.reset();
             setTimeout(() => {
                 result.style.display = "none";
-            }, 3000);
+            }, 30000);
         });
 });
 </script>

@@ -1,0 +1,94 @@
+---
+import {formatDate} from '../../utils';
+
+const { allRides, loggedIn } = Astro.props;
+let rowCounter = 0;
+---
+
+{
+    allRides.map((ri: any, index: any) => (
+        <div class="max-w-[400px] sm:max-w-[400px] bg-white border border-black shadow-lg hover:shadow-[-7px_7px_0px_#000000]">
+            <img
+                src={"/images/posts/ride-1/ride1.jpeg"}
+                alt="ride cover"
+                class="border-b border-black"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+            />
+            <p class="ml-5 mt-5 p-1 inline-block bg-black text-white text-sm text-center ">
+                {ri.title}
+            </p>
+
+            <div class="p-5">
+                <div class="flex justify-between gap-5 mb-2">
+                    <p class="mb-2 text-lg font-medium tracking-tight text-gray-900">
+                        From : {ri.from}
+                    </p>
+                    <p class="mb-2 text-lg font-medium tracking-tight text-gray-900">
+                        To : {ri.to}
+                    </p>
+                </div>
+                <div class="flex justify-between gap-4 mb-2">
+                    <p class="mb-2 text-lg font-medium tracking-tight text-gray-900">
+                        Date: {formatDate(ri.date)}
+                    </p>
+                    <p class="mb-2 text-lg font-medium tracking-tight text-gray-900">
+                        Duration : {ri.duration}
+                    </p>
+                </div>
+                <p class="mb-2 text-md font-medium tracking-tight text-gray-900 pb-4">
+                    Riders Registered : {ri.riders.length}
+                </p>
+
+                <p class="mb-3 text-sm tracking-tight text-gray-700">
+                    {ri.description}Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Morbi eget neque augue. Quisque pretium
+                    aliquam mollis. Sed cursus posuere faucibus. Vestibulum
+                    interdum placerat nunc non posuere.
+                </p>
+                <div class="join-btn inline-flex items-center py-2 font-semibold text-center cursor-pointer" data-ride-id={ri._id}>
+                    Join Ride 
+                </div>
+            </div>
+        </div>
+    ))
+}
+
+
+<script is:inline>
+    document.addEventListener("astro:page-load", () => {
+    const token = sessionStorage.getItem("token");
+    const joinBtn = document.querySelectorAll(".join-btn");
+
+     if (token) {
+        if (joinBtn) {
+            //Api call for joining ride
+            joinBtn.forEach( btn=> {
+                btn.addEventListener("click", (e) => {
+                    const rideId = btn.dataset.rideId;
+                    e.preventDefault();
+           
+                    console.log(rideId);
+                    console.log("Clicked Join Ride");
+                    //location.reload();
+            
+        })})}
+        else{
+
+        }      
+    } else {
+        if (joinBtn) {
+            joinBtn.forEach( btn=> {
+                btn.addEventListener("click", (e) => {
+                    window.location.href='/login';
+
+            
+        })})}
+        }
+
+    }
+)
+
+</script>

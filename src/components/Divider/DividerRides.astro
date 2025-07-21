@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import double_down_icon from '../../assets/icons/double_down_icon.svg'
+
+const {title} = Astro.props;
+
+interface Props{
+    title:string
+}
+---
+<div class='flex items-center justify-center w-full mt-15 sm:mt-15 overflow-hidden'>
+    <hr class='items-center border-none w-1/8 h-[1px] bg-black hidden sm:block' />
+    <p class='text-center text-2xl sm:text-4xl font-extrabold tracking-[.75rem] sm:tracking-[2rem] px-10'>{title}</p>
+    <hr class='items-center border-none w-1/8 h-[1px] bg-black ml-[-35px] hidden sm:block' />
+</div>
+<div class='flex items-center justify-center pt-5 sm:pt-10 mb-10 sm:mb-15'>
+    <Image src={double_down_icon} alt="down_icon" width={25} height={25}>
+</div>
+

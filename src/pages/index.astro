@@ -16,6 +16,7 @@ const allPostArticles: CollectionEntry<"post">[] = (
     await getCollection("post")).sort((a: CollectionEntry<"post">, b: CollectionEntry<"post">) =>
 		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
 ---
 
 <MainLayout title="Home" description="Discover inspiring motorcycle adventures, travel stories, and road experiences from riders around the world.">
@@ -32,3 +33,9 @@ const allPostArticles: CollectionEntry<"post">[] = (
 	<CTA />
 
 </MainLayout>
+
+<script is:inline>
+	const retrievedValue = sessionStorage.getItem('token');
+console.log(retrievedValue);
+console.log(JSON.parse(sessionStorage.getItem('user')).ridesData);
+</script>
