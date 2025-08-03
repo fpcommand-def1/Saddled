@@ -8,13 +8,11 @@ import Divider from "../components/Divider/Divider.astro"
 import DividerRides from "../components/Divider/DividerRides.astro"
 
 //Getting cookies data
-//const userId = Astro.cookies.get("userId")?.value;
-const cookieHeader = Astro.request.headers.get("cookie") || "";
-const userId = cookieHeader
-  .split(";")
-  .map(cookie => cookie.trim())
-  .find(cookie => cookie.startsWith("userId="))
-  ?.split("=")[1] || null;
+const userId = Astro.cookies.get("userId")?.value;
+
+const response1 = await fetch(import.meta.env.PUBLIC_BACKEND_URL+"/api/user/get-user", {credentials: "include"});
+const data1 = await response1.json();
+console.log(data1.userId);
 
 
 //Listing all rides
