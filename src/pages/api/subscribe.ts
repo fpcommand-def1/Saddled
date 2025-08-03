@@ -19,7 +19,7 @@ export async function POST({ request } : { request: Request }) {
       const existing = await checkRes.json();
     
       if (existing.length > 0) {
-        return new Response(JSON.stringify({ message: 'You are already subscribed!' }), { status: 409 });
+        return new Response(JSON.stringify({ message: 'Looks like you have already fueled up! Sit back and let the stories cruise in' }), { status: 409 });
       }
 
 
@@ -33,5 +33,5 @@ export async function POST({ request } : { request: Request }) {
       if (!sheetRes.ok) {
         return new Response(JSON.stringify({ message: 'Failed to save email' }), { status: 500 });
       }
-    return new Response(JSON.stringify({ message: 'Thanks for subscribing !!!' }), { status: 200 });
+    return new Response(JSON.stringify({ message: 'Looks like you have saddled up! Sit back and let the stories cruise in. Thanks for subscribing !!!' }), { status: 200 });
   }

@@ -1,6 +1,7 @@
 ---
 // src/pages/rides/[id].astro
 import MainLayout from "../../layouts/MainLayout.astro";
+import {DOMAIN} from "../../constants"
 import { formatDate } from "../../utils";
 
 const backendUrl = import.meta.env.PUBLIC_BACKEND_URL;
@@ -29,13 +30,34 @@ const response = await fetch(
 const data = await response.json();
 const ride = data.rideData;
 const ridersData = data.riders;
+
 //console.log(ridersData);
 ---
 
-<MainLayout
-    title={ride?.title || "Ride Details"}
-    description="Details of a motorcycle ride."
->
+<MainLayout title={ride?.title || "Ride Details"} description={`Ride from ${ride?.from} to ${ride?.to} on ${formatDate(ride?.date)}. ${ride?.description?.slice(0, 120)}...`} url={DOMAIN + 'post/' + rideId}>
+
+    
+{<Fragment slot="headExtra">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": ride?.title || "Motorcycle Ride",
+    "description": `Ride from ${ride?.from} to ${ride?.to}`,
+    "startDate": ride?.date,
+    "location": {
+        "@type": "Place",
+        "name": `${ride?.from} to ${ride?.to}`
+    },
+    "organizer": {
+        "@type": "Person",
+        "name": "Saddled User"
+    }
+}
+
+  </script>
+</Fragment>
+}
     <div class="px-6 sm:px-[8vw] md:px-[12vw] lg:px-[26vw]">
         <div class="w-full h-full flex-shrink-0 prose prose-invert">
             <h1 class="text-2xl sm:text-5xl mt-30 pb-10 sm:pt-10 sm:pb-10 text-center">

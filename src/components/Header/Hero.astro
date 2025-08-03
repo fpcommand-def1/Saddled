@@ -18,7 +18,7 @@ const {recentPost} = Astro.props;
        
                 <div class='relative w-full h-full flex-shrink-0'>
                     <img src={recentPost.data.image} alt='Cover Slide' class="w-screen h-screen object-cover flex-shrink-0 z-[-10]" loading="lazy" decoding="async" width="1200" height="800" />
-                    <div class="absolute bottom-8 bg-black/60 flex flex-col items-center justify-center w-full">
+                    <div class="absolute bottom-5 bg-black/60 flex flex-col items-center justify-center w-full">
                         <p class='text-white text-2xl sm:text-5xl font-bold text-center p-2 sm:p-5'>{recentPost.data.title?.toUpperCase()}</p>
                         <p class='text-white text-xl sm:text-3xl pb-2 sm:pb-5 text-center'><em>{recentPost.data.author?.toUpperCase()}</em></p>
                         {/* <a href="">

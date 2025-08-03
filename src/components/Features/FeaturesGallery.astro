@@ -15,7 +15,7 @@ let rowCounter = 0;
                 if(rowCounter%2 === 0) {
                     
                     return(
-                        <div class={`h-full relative ${index%2 !== 0 ? 'col-span-2' : 'col-span-3'}`}>
+                        <div class={`h-full relative ${index%2 !== 0 ? 'col-span-2' : 'col-span-3'} max-h-[600px]`}>
                             <a href={`/post/${post.slug}`}>
 
                                 <img src={post.data.image} alt="Feature Gallery" class="object-cover w-full h-full" loading="lazy" decoding="async" width="1200" height="800"/>
@@ -23,7 +23,8 @@ let rowCounter = 0;
                                     <div class="md:border-4 p-4 flex flex-col items-center justify-center">
 
                                         <p class="text-lg lg:text-4xl font-extrabold">{post.data.title}</p>
-                                        <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} <span class={`${post.data.photographer === '' ? 'hidden' : 'inline-block'}`}> // {post.data.photographer}</span></em></p>
+                                        {/* <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} <span class={`${post.data.photographer === '' ? 'hidden' : 'inline-block'}`}> // {post.data.photographer}</span></em></p> */}
+                                        <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} </em></p>
                                     </div>
                                 </div>
                             </a>
@@ -33,13 +34,14 @@ let rowCounter = 0;
                 else{
                     
                     return(
-                        <div class={`h-full relative ${index%2 !== 0 ? 'col-span-3' : 'col-span-2'}`}>
+                        <div class={`h-full relative ${index%2 !== 0 ? 'col-span-3' : 'col-span-2'} max-h-[600px]`}>
                             <a href={`/post/${post.slug}`}>
                                 <img src={post.data.image} alt="Feature Gallery" class="object-cover w-full h-full" loading="lazy" decoding="async" width="1200" height="800" />
                                 <div class="absolute bg-black/50 inset-0 opacity-100 md:opacity-0 hover:opacity-100 transition duration-300 text-white flex flex-col items-center justify-center">
                                     <div class="md:border-4 p-4 flex flex-col items-center justify-center">
                                         <p class="text-lg lg:text-4xl font-extrabold">{post.data.title}</p>
-                                        <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} <span class={`${post.data.photographer === '' ? 'hidden' : 'inline-block'}`}> // {post.data.photographer}</span></em></p>
+                                        {/* <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} <span class={`${post.data.photographer === '' ? 'hidden' : 'inline-block'}`}> // {post.data.photographer}</span></em></p> */}
+                                        <p class="text-sm lg:text-xl pt-5 font-extrabold"><em>{post.data.author} </em></p>
                                     </div>
                                 </div>
                             </a>
