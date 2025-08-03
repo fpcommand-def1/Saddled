@@ -5,4 +5,13 @@ function formatDate(date:Date): string {
     return( new Date(date).toLocaleDateString(undefined, options));
   }
 
-  export {formatDate} ;
+//Login Logout check
+function hideLoginCTA() {
+  const token = sessionStorage.getItem('token');
+  const loginCTA = document.getElementById('login-cta');
+  if (token && loginCTA) {
+    loginCTA.style.display = 'none';
+  }
+  
+}
+  export {formatDate, hideLoginCTA} ;

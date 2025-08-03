@@ -1,0 +1,177 @@
+---
+// src/pages/rides/[id].astro
+import MainLayout from "../../layouts/MainLayout.astro";
+import {DOMAIN} from "../../constants"
+import { formatDate } from "../../utils";
+
+const backendUrl = import.meta.env.PUBLIC_BACKEND_URL;
+
+const { params } = Astro;
+const rideId = params.id;
+
+
+if (rideId === undefined) {
+    throw new Error("RideId is required");
+}
+
+//Listing logged in user ride
+const response = await fetch(
+    import.meta.env.PUBLIC_BACKEND_URL + "/api/rides/get-ride-data",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify({ id: rideId }),
+    },
+);
+
+const data = await response.json();
+const ride = data.rideData;
+const ridersData = data.riders;
+
+//console.log(ridersData);
+---
+
+<MainLayout title={ride?.title || "Ride Details"} description={`Ride from ${ride?.from} to ${ride?.to} on ${formatDate(ride?.date)}. ${ride?.description?.slice(0, 120)}...`} url={DOMAIN + 'post/' + rideId}>
+
+    
+{<Fragment slot="headExtra">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": ride?.title || "Motorcycle Ride",
+    "description": `Ride from ${ride?.from} to ${ride?.to}`,
+    "startDate": ride?.date,
+    "location": {
+        "@type": "Place",
+        "name": `${ride?.from} to ${ride?.to}`
+    },
+    "organizer": {
+        "@type": "Person",
+        "name": "Saddled User"
+    }
+}
+
+  </script>
+</Fragment>
+}
+    <div class="px-6 sm:px-[8vw] md:px-[12vw] lg:px-[26vw]">
+        <div class="w-full h-full flex-shrink-0 prose prose-invert">
+            <h1 class="text-2xl sm:text-5xl mt-30 pb-10 sm:pt-10 sm:pb-10 text-center">
+                {ride?.title}
+            </h1>
+            <div class="flex flex-row justify-between items-center pb-5 pt-5">
+                <p class="text-md sm:text-xl pb-5 sm:pb-3">
+                    <strong>From : </strong>
+                    <em>{ride?.from}</em>
+                </p>
+                <p class="text-md sm:text-xl pb-5 sm:pb-3">
+                    <strong>To : </strong><em>{ride?.to}</em>
+                </p>
+            </div>
+            <div class="flex flex-row justify-between items-center pb-2 md:pt-5">
+                <p class="text-md sm:text-xl pb-10 sm:pb-20">
+                    <strong>Date : </strong><em>{formatDate(ride?.date)}</em>
+                </p>
+                <p class="text-md sm:text-xl pb-10 sm:pb-20">
+                    <strong>Duration : </strong><em>{ride?.duration}</em>
+                </p>
+            </div>
+            <p class="text-md sm:text-xl pb-10 lg:text-center sm:pb-20">
+                <strong>Contact : </strong><em>{ride?.contact ? "" : "contact"}</em>
+            </p>
+
+            <p class="text-md sm:text-xl pb-5 sm:pb-10">
+                <strong>Description : </strong>
+            </p>
+            <p class="text-md sm:text-xl text-justify pb-5 sm:pb-20 text-gray-500">
+                {ride?.description}
+            </p>
+
+            <div class="flex flex-row items-center">
+                <p class="text-md sm:text-xl pb-2">
+                    <strong>Riders Joined ({ridersData.length}) : </strong><em>
+                        {
+                            ridersData.map((name: any, index: any) => (
+                                <span>{name},&nbsp;</span>
+                            ))
+                        }
+                    </em>
+                </p>
+            </div>
+            <hr class="w-full h-full bg-gray-500 h-[1px] mb-5 sm:mb-10 sm:mt-10"/>
+            <a id="join-btn" data-ride-id={ride._id} class="border-white border-2 bg-black text-white sm:text-xl mt-2 px-4 py-1 sm:px-8 sm:py-2 cursor-pointer z-20 hover:text-black hover:bg-white hover:border-black transition duration-300 uppercase tracking-wide">
+                Join
+            </a>
+            <div id = "result" class="mt-2"></div>
+        </div>
+    </div>
+</MainLayout>
+
+
+<script is:inline define:vars={{backendUrl}}>
+    document.addEventListener("astro:page-load", () => {
+    const token = sessionStorage.getItem("token");
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    
+    if(!token || !user) {
+        window.location.href='/login';
+    }
+    const joinBtn = document.getElementById("join-btn");
+    const rideId = joinBtn.dataset.rideId;
+
+    const result = document.getElementById('result');
+
+    const json = JSON.stringify({ userId: user._id, rideId: rideId})
+    
+
+     if (token) {
+        if (joinBtn) {
+            //Api call for joining ride
+            joinBtn.addEventListener("click", (e)=>{
+       
+            fetch(backendUrl + '/api/rides/join-ride', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (json.success) {
+                result.innerHTML = json.message || "Ride joined successfully!";
+                // Delay redirection to rides page
+                    setTimeout(() => {
+                        window.location.href = '/ridesLogin';
+                    }, 1500);
+            } else {
+                console.log(response);
+                result.innerHTML = json.message || "Failed to join ride";
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        }
+    )}
+          
+    } else {
+        if (joinBtn) {
+            joinBtn.forEach( btn=> {
+                btn.addEventListener("click", (e) => {
+                    window.location.href='/login';
+
+            
+        })})}
+        }
+
+    }
+)
+
+</script>

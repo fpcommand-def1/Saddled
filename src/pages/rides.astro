@@ -1,0 +1,44 @@
+---
+import ButtonDark from "../components/Button/ButtonDark.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import Login from "../components/Auth/LoginState.astro";
+import RideCardOthers from "../components/Rides/RideCardOthers.astro";
+import Divider from "../components/Divider/Divider.astro"
+
+
+const response = await fetch(import.meta.env.PUBLIC_BACKEND_URL+"/api/rides/list-all");
+const data = await response.json();
+const rides = data.rides;
+---
+
+<MainLayout title="Home" description="Login Page for exploring motorcycling rides.">
+  <Divider title={"BreakDown "} />
+    <div class="mt-5 md:mt-15 ml-5 mr-5 md:ml-20 md:mr-20">
+        <div id="login-cta" class="flex justify-center items-center mb-8">
+
+            <Login />
+
+            <!-- <ButtonDark buttonText="LOGIN TO JOIN / CREATE RIDES" link={`/login`}/> -->
+
+        </div>
+        
+
+        <div class="ride-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <RideCardOthers allRides={rides} loggedIn="no"/>
+
+            
+        </div>
+    </div>
+</MainLayout>
+
+
+
+<style>
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  .ride-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+</style>
+
+

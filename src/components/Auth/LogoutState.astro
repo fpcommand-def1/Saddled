@@ -1,0 +1,42 @@
+---
+//Logout Header for Not Signed In Users
+---
+<div id="logout-state-container" class="flex justify-between items-center">
+  <!-- Create Ride Button (Right) -->
+  <a id="create-ride-btn" href="/create-ride" class="border-white border-2 bg-black text-white sm:text-xl mt-2 px-4 py-1 sm:px-8 sm:py-2 cursor-pointer z-20 hover:text-black hover:bg-white hover:border-black transition duration-300 uppercase tracking-wide">
+    CREATE A RIDE
+  </a>
+  
+  <!-- Logout Button (Left) -->
+  <a id="logout-btn" class="border-white border-2 bg-black text-white sm:text-xl mt-2 px-4 py-1 sm:px-8 sm:py-2 lg:mr-4 ursor-pointer z-20 hover:text-black hover:bg-white hover:border-black transition duration-300 uppercase tracking-wide">
+    LOGOUT
+  </a>
+
+</div>
+
+
+<script is:inline>
+    document.addEventListener("astro:page-load", () => {
+    const token = sessionStorage.getItem("token");
+    const logoutBtn = document.getElementById("logout-btn");
+
+     if (token) {
+        if (logoutBtn) {
+            logoutBtn.onclick = (e) => {
+            e.preventDefault();
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
+            window.location.href = "/";
+            //location.reload();
+      };
+        }
+        else{
+
+        }      
+    } else {
+        window.location.href='/login'
+
+    }
+  })
+
+</script>
