@@ -6,20 +6,12 @@ import RideCardOthers from "../components/Rides/RideCardOthers.astro";
 import Divider from "../components/Divider/Divider.astro"
 
 
-console.log(import.meta.env.PUBLIC_BACKEND_URL+"/api/rides/list-all");
+
 const response = await fetch(import.meta.env.PUBLIC_BACKEND_URL+"/api/rides/list-all");
 const data = await response.json();
 const rides = data.rides;
 
 
-
-try {
-  const res = await fetch(`${import.meta.env.PUBLIC_BACKEND_URL}/api/rides/list-all`);
-  const data = await res.json();
-  console.log("Fetched Data:", data);
-} catch (err) {
-  console.error("Fetch failed:", err);
-}
 ---
 
 <MainLayout title="Home" description="Login Page for exploring motorcycling rides.">
