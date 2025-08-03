@@ -14,7 +14,7 @@ const rides = data.rides;
 
 
 try {
-  const res = await fetch(`${import.meta.env.PUBLIC_BACKEND_URL}/api/rides`);
+  const res = await fetch(`${import.meta.env.PUBLIC_BACKEND_URL}/api/rides/list-all`);
   const data = await res.json();
   console.log("Fetched Data:", data);
 } catch (err) {
